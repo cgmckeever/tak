@@ -67,6 +67,8 @@ filesync (){
 
 	cp scripts/functions.inc.sh ${TAK_PATH}/tak-tools/
 	cp ${RELEASE_PATH}/config.inc.sh ${TAK_PATH}/tak-tools/
+
+	mkdir -p jdk/bin
 }
 
 ###########
@@ -142,13 +144,12 @@ DB_PASS=${PASSGEN}
 #
 scripts/${INSTALLER}/tear-down.sh ${TAK_ALIAS}
 
+## Prep
+#
 RELEASE_PATH=${ROOT_PATH}/release/${TAK_ALIAS}
 mkdir ${RELEASE_PATH}
 
 TAK_PATH=${RELEASE_PATH}/tak
-
-## Prep
-#
 echo
 if [[ "${INSTALLER}" == "docker" ]];then 
 	if ! java -version &> /dev/null;then
@@ -167,8 +168,6 @@ else
 
 	TAK_DB_ALIAS=127.0.0.1
 fi 
-
-mkdir -p jdk/bin
 
 info ${RELEASE_PATH} "---- TAK Info: ${TAK_ALIAS} ----" init
 info ${RELEASE_PATH} "Install: ${INSTALLER}"
@@ -206,7 +205,7 @@ conf ${TAK_ALIAS}
 letsencrypt 
 coreconfig
 
-## Install
+## Configure
 #
 if [[ "${INSTALLER}" == "docker" ]];then 
 	filesync

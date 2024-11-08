@@ -56,9 +56,9 @@ if [ "$STARTED" = "true" ];then
 	    ${SCRIPT_PATH}/post-install.sh ${TAK_ALIAS}
 	fi
 
-	msg $success "\n\nTAK Server installation completed."
+	msg $success "\n\n                         TAK Server installation completed."
 else
-	msg $warn "\nTAK Server install not successful."
+	msg $warn "\n\n                       TAK Server install not successful."
 fi
 
 echo;echo
