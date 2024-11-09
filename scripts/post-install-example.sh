@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-source ${SCRIPT_PATH}/functions.inc.sh
+source ${SCRIPT_PATH}/inc/functions.sh
 
 conf ${1}
 
@@ -15,4 +15,5 @@ conf ${1}
 #
 # passgen ${USER_PASS_OMIT}
 # ${SCRIPT_PATH}/user-gen.sh ${TAK_ALIAS} recon-7 "${PASSGEN}"
+
 

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-ROOT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
+# /path/from/scripts/inc
+ROOT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../..")
 
 NOW=$(date "+%Y.%m.%d-%H.%M.%S")
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-source ${SCRIPT_PATH}/functions.inc.sh 
+source ${SCRIPT_PATH}/inc/functions.sh 
 
 msg $warning "\n\n------------ Updating UFW Firewall Rules ------------\n\n"
 

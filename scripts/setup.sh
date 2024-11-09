@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-source ${SCRIPT_PATH}/functions.inc.sh 
+source ${SCRIPT_PATH}/inc/functions.sh 
 
 install_init
 
@@ -65,8 +65,10 @@ filesync (){
 	
 	cp tak-conf/setenv.sh ${TAK_PATH}/
 
-	cp scripts/functions.inc.sh ${TAK_PATH}/tak-tools/
+	cp ${SCRIPT_PATH}/inc/functions.sh ${TAK_PATH}/tak-tools/
 	cp ${RELEASE_PATH}/config.inc.sh ${TAK_PATH}/tak-tools/
+
+	mkdir -p jdk/bin
 }
 
 ###########
@@ -142,17 +144,16 @@ DB_PASS=${PASSGEN}
 #
 scripts/${INSTALLER}/tear-down.sh ${TAK_ALIAS}
 
-RELEASE_PATH=${ROOT_PATH}/release/${TAK_ALIAS}
-mkdir ${RELEASE_PATH}
-
-TAK_PATH=${RELEASE_PATH}/tak
-
 ## Prep
 #
+RELEASE_PATH=${ROOT_PATH}/release/${TAK_ALIAS}
+mkdir -p ${RELEASE_PATH}
+
+TAK_PATH=${RELEASE_PATH}/tak
 echo
 if [[ "${INSTALLER}" == "docker" ]];then 
 	if ! java -version &> /dev/null;then
-		scripts/jdk.sh
+		${SCRIPT_PATH}/inc/jdk.sh
 	fi
 
 	TEMP_DIR=$(mktemp -d)
@@ -167,8 +168,6 @@ else
 
 	TAK_DB_ALIAS=127.0.0.1
 fi 
-
-mkdir -p jdk/bin
 
 info ${RELEASE_PATH} "---- TAK Info: ${TAK_ALIAS} ----" init
 info ${RELEASE_PATH} "Install: ${INSTALLER}"
@@ -206,18 +205,19 @@ conf ${TAK_ALIAS}
 letsencrypt 
 coreconfig
 
-## Install
+## Configure
 #
 if [[ "${INSTALLER}" == "docker" ]];then 
 	filesync
-	scripts/cert-gen.sh ${TAK_ALIAS}
+	${SCRIPT_PATH}/inc/cert-gen.sh ${TAK_ALIAS}
 	scripts/docker/compose.sh ${TAK_ALIAS}
 else
 	apt install -y ${TAK_PACKAGE}
   usermod --shell /bin/bash tak
+  echo
 
   filesync
-  scripts/cert-gen.sh ${TAK_ALIAS}
+  ${SCRIPT_PATH}/inc/cert-gen.sh ${TAK_ALIAS}
 
   msg $info "\n\nPerforming TAK Server enable:"
 	chown -R tak:tak /opt/tak
@@ -227,7 +227,7 @@ fi
 
 ## Init
 #
-scripts/init.sh ${TAK_ALIAS}
+${SCRIPT_PATH}/inc/init.sh ${TAK_ALIAS}
 
 
 

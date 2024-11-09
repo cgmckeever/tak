@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /opt/tak/tak-tools/functions.inc.sh
+source /opt/tak/tak-tools/functions.sh
 conf
 
 USERNAME=${1}

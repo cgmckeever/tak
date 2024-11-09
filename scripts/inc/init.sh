@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-source ${SCRIPT_PATH}/functions.inc.sh
+SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
+source ${SCRIPT_PATH}/inc/functions.sh
 
 conf ${1}
 
@@ -47,7 +47,7 @@ if [ "$STARTED" = "true" ];then
 	${SCRIPT_PATH}/cert-bundler.sh ${TAK_ALIAS} false
 
 	if [ ! -f "${SCRIPT_PATH}/post-install.sh" ];then
-		cp ${SCRIPT_PATH}/post-install-example.sh ${ROOT_PATH}/scripts/post-install.sh
+		cp ${SCRIPT_PATH}/post-install-example.sh ${SCRIPT_PATH}/post-install.sh
 	fi
 
 	echo 
@@ -56,9 +56,9 @@ if [ "$STARTED" = "true" ];then
 	    ${SCRIPT_PATH}/post-install.sh ${TAK_ALIAS}
 	fi
 
-	msg $success "\n\nTAK Server installation completed."
+	msg $success "\n\n                         TAK Server installation completed."
 else
-	msg $warn "\nTAK Server install not successful."
+	msg $warn "\n\n                       TAK Server install not successful."
 fi
 
 echo;echo
