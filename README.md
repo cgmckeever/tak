@@ -100,6 +100,8 @@ scripts/user-gen.sh {TAK_ALIAS} {USERNAME} "{PASSWORD}"
 scripts/user-cert-revoke.sh {TAK_ALIAS} {USERNAME}
 ```
 
+\*Requires a reboot to take effect
+
 ### LetsEncrypt
 
 #### Request Cert
@@ -115,6 +117,7 @@ scripts/letsencrypt-import.sh {TAK_ALIAS}
 ```
 
 \*Requires `CoreConfig.xml` to be properly configured to use LetsEncrypt [handled during install]
+
 \*Requires a reboot to take effect
 
 
