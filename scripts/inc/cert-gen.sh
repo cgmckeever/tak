@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-source ${SCRIPT_PATH}/functions.inc.sh
+SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
+source ${SCRIPT_PATH}/inc/functions.sh
 
 conf ${1}
 
@@ -67,7 +67,7 @@ rename_files ${TAK_CN} takserver ${CERT_FILE_PATH}
 ## LETSENCRYPT Cert for 8446 
 #
 if [ "$LETSENCRYPT" = "true" ] && [ -d "/etc/letsencrypt/live/${TAK_URI}" ];then
-    ${ROOT_PATH}/scripts/letsencrypt-import.sh ${TAK_ALIAS}
+    ${SCRIPT_PATH}/letsencrypt-import.sh ${TAK_ALIAS}
 
     ## Create ITAK autoenroll QR (requires trusted cert)
     #

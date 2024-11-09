@@ -1,7 +1,7 @@
 #!/bin/bash
 
 SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
-source ${SCRIPT_PATH}/functions.inc.sh
+source ${SCRIPT_PATH}/inc/functions.sh
 
 conf ${1}
 
@@ -17,8 +17,10 @@ if apt list --installed 2>/dev/null | grep -q "takserver";then
 	sudo -u postgres psql -c "DROP USER IF EXISTS martiuser;"
 fi
 
-if [ -d "${RELEASE_PATH}" ]; then
-	${SCRIPT_PATH}/cert-bundler.sh ${TAK_ALIAS}
+if [ -d "${RELEASE_PATH}" ];then
+	if [ -d "${RELEASE_PATH}/tak/certs/files" ];then
+		${SCRIPT_PATH}/cert-bundler.sh ${TAK_ALIAS}
+	fi 
 
 	msg $danger "\nWiping ${RELEASE_PATH}"
 	rm -rf ${RELEASE_PATH}

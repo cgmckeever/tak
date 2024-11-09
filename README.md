@@ -57,7 +57,7 @@ If the file `scripts/post-install.sh` exists, it will run after a successful ins
 ### Firewall
 
 ```
-scripts/firewall.sh
+scripts/setup-firewall.sh
 ```
 
 ## Utilities
@@ -97,7 +97,7 @@ scripts/user-gen.sh {TAK_ALIAS} {USERNAME} "{PASSWORD}"
 #### Revoke Cert
 
 ```
-scripts/revoke-cert.sh {TAK_ALIAS} {USERNAME}
+scripts/user-cert-revoke.sh {TAK_ALIAS} {USERNAME}
 ```
 
 ### LetsEncrypt

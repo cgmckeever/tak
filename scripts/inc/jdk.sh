@@ -1,7 +1,7 @@
 #!/bin/bash
 
-SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
-source ${SCRIPT_PATH}/functions.inc.sh
+SCRIPT_PATH=$(realpath "$(dirname "${BASH_SOURCE[0]}")/..")
+source ${SCRIPT_PATH}/inc/functions.sh
 
 install_init
 
