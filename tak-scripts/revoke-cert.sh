@@ -18,6 +18,5 @@ if [[ -f ${CERT} ]]; then
 
     msg $warn "\nRevoked Client Certificate cert/${CERT}"
 else
-    echo "Client Certificate cert/${CERT} not found"
     msg $danger "Client Certificate cert/${CERT} not found"
 fi

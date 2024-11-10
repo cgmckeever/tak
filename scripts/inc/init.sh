@@ -48,12 +48,12 @@ if [ "$STARTED" = "true" ];then
 
 	if [ ! -f "${SCRIPT_PATH}/post-install.sh" ];then
 		cp ${SCRIPT_PATH}/post-install-example.sh ${SCRIPT_PATH}/post-install.sh
-	fi
-
-	echo 
-	prompt "Kick off post-install script [y/N]? " POST_INSTALL
-	if [[ ${POST_INSTALL} =~ ^[Yy]$ ]];then
-	    ${SCRIPT_PATH}/post-install.sh ${TAK_ALIAS}
+	else
+		echo 
+		prompt "Kick off post-install script [y/N]? " POST_INSTALL
+		if [[ ${POST_INSTALL} =~ ^[Yy]$ ]];then
+		    ${SCRIPT_PATH}/post-install.sh ${TAK_ALIAS}
+		fi
 	fi
 
 	msg $success "\n\n                         TAK Server installation completed."
