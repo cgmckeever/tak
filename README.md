@@ -4,12 +4,11 @@
 
 - [-] Add Firewall and VPN support
 - [ ] NGINX doc server
+- [ ] RasPi installer
 
 ### Aux Scripts
 
-- [-] Revoke Local Certs
-- [-] Restart/prompt
-- [ ] Backup Zips
+- TBD
 
 ## Prep this repository
 
@@ -64,12 +63,20 @@ scripts/setup-firewall.sh
 
 ### TAK Utilities
 
+#### Backup 
+
+Creates a snapshot of TAK folder (not the DB)
+
+```
+scripts/backup.sh {TAK_ALIAS}
+```
+
 #### Certificate Bundler/Backup
 
 Create a zip-bundle of the `certs/files` as backup
 
 ```
-scripts/cert-bundler.sh
+scripts/cert-bundler.sh {TAK_ALIAS}
 ```
 
 #### System Manager
@@ -84,6 +91,16 @@ scripts/system.sh {TAK_ALIAS} {start|stop|status|restart}
 
 ```
 scripts/{docker|ubuntu}/tear-down.sh {TAK_ALIAS}
+```
+
+#### Upgrade (Docker only)
+
+- backs up config and `tak` directory
+- unpacks new docker zip
+- syncs previous certificates
+
+```
+scripts/docker/upgrade.sh {TAK_ALIAS}
 ```
 
 ### User Management
