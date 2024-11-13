@@ -7,6 +7,8 @@ conf ${1}
 
 cd ${RELEASE_PATH}/tak/certs
 
+msg $warn "\nImporting Lets Encrypt requires \`sudo\` access: \n"
+
 sudo cp /etc/letsencrypt/live/${TAK_URI}/fullchain.pem files/letsencrypt.pem
 sudo cp /etc/letsencrypt/live/${TAK_URI}/privkey.pem files/letsencrypt.key.pem
 sudo chown $(whoami) files/letsencrypt*

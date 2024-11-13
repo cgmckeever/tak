@@ -25,7 +25,7 @@ msg $info "\nCreating Root CA"
 ## No CA is included in Trustsore [??]
 #       https://discord.com/channels/698067185515495436/962362215242022912
 #
-msg $info "\nCreating Bundled Root CA Truststore "
+msg $info "\nCreating Bundled Root CA Truststore"
 openssl x509 \
     -in files/root-ca-trusted.pem \
     -out files/root-ca-trusted.x509.pem

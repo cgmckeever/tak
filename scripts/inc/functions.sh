@@ -31,12 +31,18 @@ install_init () {
 conf () {
     if [ -n "${1}" ];then
         RELEASE_PATH="${ROOT_PATH}/release/${1}"
+        CONF_PATH=${RELEASE_PATH}
+        TAK_PATH=${RELEASE_PATH}/tak
     else
-        RELEASE_PATH="/opt/tak/tak-tools"
+        CONF_PATH="/opt/tak/tak-tools"
+        TAK_PATH="/opt/tak"
     fi
 
-    if [ -f "${RELEASE_PATH}/config.inc.sh" ]; then
-        source ${RELEASE_PATH}/config.inc.sh
+    if [ -f "${CONF_PATH}/config.inc.sh" ];then
+        source ${CONF_PATH}/config.inc.sh
+        if [[ "${INSTALLER}" == "ubuntu" ]];then 
+            TAK_PATH="/opt/tak"
+        fi
         conf_expand
     fi
 }
