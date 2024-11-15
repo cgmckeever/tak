@@ -2,9 +2,10 @@
 
 ## TODO
 
+- [ ] Better non `root` handling
 - [-] Add Firewall and VPN support
 - [ ] NGINX doc server
-- [ ] RasPi installer
+- [-] RasPi installer
 
 ### Aux Scripts
 
@@ -143,12 +144,12 @@ scripts/letsencrypt-import.sh {TAK_ALIAS}
 ### Docker
 
 - 4.10 	[MBP / Ubuntu 22.04]
-- 5.2 	[MBP / Ubuntu 22.04]
+- 5.2 	[MBP / Ubuntu 22.04 / RasPi4]
 
 ### Ubuntu
 
 - Ubuntu 22.04
-	- 5.2 
+	- 5.2 [x86_64 / RasPi4]
 
 ## Previous Versions
 

@@ -12,11 +12,13 @@ install_init () {
     case "$(uname)" in
         "Linux")
             OS="linux"
+            ARCH=$(uname -m)
             DEFAULT_NIC=$(ip route | grep '^default' | awk '{print $5}')
             IP_ADDRESS=$(ip addr show "${DEFAULT_NIC}" | grep 'inet ' | awk '{print $2}' | cut -d'/' -f1)
             ;;
         "Darwin")
             OS="macosx"
+            ARCH=$(uname -m)
             HOSTNAME=$(hostname)
             DEFAULT_NIC=$(route get default | grep 'interface:' | awk '{print $2}')
             IP_ADDRESS=$(ifconfig "${DEFAULT_NIC}" | grep 'inet ' | awk '{print $2}')
