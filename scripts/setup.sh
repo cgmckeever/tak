@@ -16,43 +16,21 @@ install_init
 #
 source scripts/inc/package.sh
 
-## Release Name
+## Inputs
 #
-HOSTNAME_DEFAULT=${HOSTNAME//\./-}
-prompt "Name your TAK release alias [${HOSTNAME_DEFAULT}] :" TAK_ALIAS
-TAK_ALIAS=${TAK_ALIAS:-${HOSTNAME_DEFAULT}}
+CONFIG_TMPL="config.inc.example.sh"
+source scripts/inc/inputs.sh
 
-## TAK URI 
-#
-prompt "What is the URI (FQDN, hostname, or IP) [${IP_ADDRESS}] :" TAK_URI
-TAK_URI=${TAK_URI:-${IP_ADDRESS}}
-
-## Passwords
-#
-passgen ${DB_PASS_OMIT}
-TAK_DB_PASS=${PASSGEN}
-#prompt "TAK Database Password: Default [${TAK_DB_PASS}] :" DB_PASS_INPUT
-#TAK_DB_PASS=${DB_PASS_INPUT:-${TAK_DB_PASS}}
 
 ## Tear-Down/Clean-up
 #
 scripts/${INSTALLER}/tear-down.sh ${TAK_ALIAS}
 
+
 ## TAK-Tools Config
 #
-if [[ "${INSTALLER}" == "docker" ]];then 
-	TAK_DB_ALIAS=tak-database
-else	
-	TAK_DB_ALIAS=127.0.0.1
-fi 
-
 RELEASE_PATH=${ROOT_PATH}/release/${TAK_ALIAS}
 mkdir -p ${RELEASE_PATH}
-
-CONFIG_TMPL="config.inc.template.sh"
-if [ ! -f "${CONFIG_TMPL}" ]; then
-	CONFIG_TMPL="config.inc.example.sh"
-fi 
 
 sed -e "s/__TAK_ALIAS/${TAK_ALIAS}/g" \
 	-e "s/__TAK_URI/${TAK_URI}/g" \
@@ -60,6 +38,17 @@ sed -e "s/__TAK_ALIAS/${TAK_ALIAS}/g" \
 	-e "s/__VERSION/$VERSION/g" \
 	-e "s/__TAK_DB_ALIAS/$TAK_DB_ALIAS/g" \
 	-e "s/__TAK_DB_PASS/${TAK_DB_PASS}/g" \
+	-e "s/__CA_PASS/${CA_PASS}/g" \
+	-e "s/__CERT_PASS/${CERT_PASS}/g" \
+	-e "s/__ORGANIZATIONAL_UNIT/${ORGANIZATIONAL_UNIT}/g" \
+	-e "s/__ORGANIZATION/${ORGANIZATION}/g" \
+	-e "s/__CITY/${CITY}/g" \
+	-e "s/__STATE/${STATE}/g" \
+	-e "s/__COUNTRY/${COUNTRY}/g" \
+	-e "s/__CLIENT_VALID_DAYS/${CLIENT_VALID_DAYS}/g" \
+	-e "s/__LE_ENABLE/${LE_ENABLE}/g" \
+	-e "s/__LE_EMAIL/${LE_EMAIL}/g" \
+	-e "s/__LE_VALIDATOR/${LE_VALIDATOR}/g" \
 	${CONFIG_TMPL} > ${RELEASE_PATH}/config.inc.sh
 
 info ${RELEASE_PATH} "---- TAK Info: ${TAK_ALIAS} ----" init

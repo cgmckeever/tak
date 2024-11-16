@@ -145,3 +145,7 @@ rename_files() {
         echo "Renamed: $(basename ${FILE}) -> $(basename ${NEW_FILE})"
     done
 }
+
+uppercase() {
+    echo "${1}" | tr '[:lower:]' '[:upper:]'
+}
