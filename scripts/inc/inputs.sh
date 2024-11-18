@@ -27,7 +27,7 @@ fi
 
 ## CA Info
 #
-msg $info "\n\nCertificate Information"
+msg $info "\n\nCertificate Information (you can accept all the defaults)"
 
 ORGANIZATION_DEFAULT="tak-tools"
 prompt "Certificate Organization [${ORGANIZATION_DEFAULT}] :" ORGANIZATION
